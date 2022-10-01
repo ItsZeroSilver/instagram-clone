@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 //@Controller
 public class ViewControllerTest {
-//2222
 	@GetMapping("/auth/signup")
 	public String signupPage() {
 		return "auth/signup";

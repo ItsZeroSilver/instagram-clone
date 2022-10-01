@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //csrf 토큰을 비활성화
         /** CSRF 토큰
-         *  회원가입 페이지(signin)에서 로그인페이지(signup)으로 값을 보낼 때 시큐리티 CSRF토큰을 보내줌
+         *  회원가입 페이 지(signin)에서 로그인페이지(signup)으로 값을 보낼 때 시큐리티 CSRF토큰을 보내줌
          *  서버에서는 CSFR토큰이 있는지 확인 후 로그인페이지로 이동할 수 있음.
          *  만약 CSFR토큰이 없다면 , 403에러가 뜸.
          *  해당 기능은 정상적인 방법으로 접근했는지, 안했는지를 구분해주기 위함.

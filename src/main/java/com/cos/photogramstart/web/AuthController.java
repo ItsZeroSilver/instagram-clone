@@ -2,6 +2,8 @@ package com.cos.photogramstart.web;
 
 import com.cos.photogramstart.Service.AuthService;
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ControllerExceptionHandler;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -41,16 +43,16 @@ public class AuthController {
     //bindingResult: class
     //signupDTO에서 에러(20자 초과, Null등)가 발생하면 모두 bindingResult에 넣어줌
     //ResponseBody: 데이터를 응답함
-    public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
+    public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
                 System.out.println(error.getDefaultMessage());
             }
-            return "오류남";
+            throw new CustomValidationException("유효성 검사에 실패함",errorMap);
         } else {
-            //log.info(signupDto.toString());
+            //log.info(signupDto.toString())용
             //signupDto값을 받아서 User(MariaDB)에 집어 넣을거임.
             User user = signupDto.toEntity();
             User userEntity = authService.회원가입(user);
